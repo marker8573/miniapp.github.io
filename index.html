@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>这是一个HTML5的网页</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telegram DApp</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.6.1/dist/web3.min.js"></script>
+
+  <style>
+    /* 设置页面背景为深色，以便白色字体更清晰 */
+    body {
+      background-color: #333;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    h1, h3 {
+      color: white;
+    }
+
+    input, button {
+      color: black; /* 设置输入框和按钮文字为黑色，方便阅读 */
+      padding: 8px;
+      margin: 4px 0;
+    }
+
+    p {
+      color: white;
+    }
+  </style>
+  
 </head>
 <body>
-<p>Hello HTML5</p>
+  <h1>Telegram DApp Interface</h1>
+
+  <!-- 地址查询余额 -->
+  <div>
+    <h3>查询账户余额</h3>
+    <input type="text" id="address" placeholder="输入以太坊地址">
+    <button onclick="checkBalance()">查询余额</button>
+    <p id="balanceResult"></p>
+  </div>
+
+  <!-- 发送交易 -->
+  <div>
+    <h3>发送交易</h3>
+    <input type="text" id="fromAddress" placeholder="发送地址">
+    <input type="text" id="toAddress" placeholder="接收地址">
+    <input type="text" id="amount" placeholder="发送金额（ETH）">
+    <button onclick="sendTransaction()">发送交易</button>
+    <p id="transactionResult"></p>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
