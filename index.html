@@ -70,7 +70,25 @@
     import { OKXUniversalProvider } from 'https://cdn.jsdelivr.net/npm/@walletconnect/universal-provider@2.17.1/dist/index.cjs.js';
     // import { OKXUniversalProvider } from 'https://unpkg.com/@walletconnect/universal-provider@2.17.1/dist/esm/index.js';
     // 创建 OKXUniversalProvider 实例
-    const provider = new OKXUniversalProvider();
+    // const provider = new OKXUniversalProvider();
+
+    const provider = await UniversalProvider.init({
+        projectId: 'YOUR_PROJECT_ID',
+        metadata: {
+            name: 'Ricky WalletConnect App',
+            description: 'App to connect wallets',
+            url: 'https://marker8573.github.io/miniapp.github.io/',
+            icons: ['https://polygonscan.com/token/images/originlgns_32.png']
+        }
+    });
+
+        // 断开连接会触发该事件；
+    provider.on("session_delete", ({topic}) => {
+      console.log(topic);
+      document.getElementById('status').innerText = `session_delete 断开连接成功回调！`;
+    });
+
+
 
     document.getElementById('connectButton').onclick = async () => {
         try {
@@ -88,7 +106,7 @@
     
     document.getElementById('disconnectOkxWalletBtn').onclick = async () => {
         try {
-          okxUniversalProvider.disconnect();
+          provider.disconnect();
           document.getElementById('status').innerText = `断开连接成功！`;
         } catch (error) {
             console.error(error);
