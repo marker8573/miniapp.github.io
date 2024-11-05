@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Telegram DApp</title>
   <script src="https://cdn.jsdelivr.net/npm/web3@1.6.1/dist/web3.min.js"></script>
+  <script type="module" src="src/app.js"></script>
 
   <style>
     /* 设置页面背景为深色，以便白色字体更清晰 */
@@ -35,7 +36,7 @@
 
   <div>
     <h1>Connect to OkxWallet</h1>
-    <button onclick="connectOkxWallet()" id="connectOkxWallet">连接 Okx-Wallet</button>
+    <button id="connectOkxWalletBtn">连接 Okx-Wallet</button>
     
   </div>
 
@@ -45,7 +46,7 @@
   
   <div>
     <h1>Disconnect to OkxWallet</h1>
-    <button onclick="disconnectOkxWallet()" id="disconnectOkxWallet">断开链接 Okx-Wallet</button>
+    <button onclick="disconnectOkxWallet()" id="disconnectOkxWalletBtn">断开链接 Okx-Wallet</button>
   </div>
 
 
@@ -57,8 +58,27 @@
   </div>
 
 
-  <script src="src/app.js">
+  <script type="module">
+    import { connectOkxWallet } from './src/app.js';
+
+    document.getElementById('connectOkxWalletBtn').onclick = function() {
+        console.log("1111111111111111111")
+        console.assert(1111111)
+        connectOkxWallet();
+    };
+
+    document.getElementById('disconnectOkxWalletBtn').onclick = function() {
+        console.log("2222222222222")
+        disconnectOkxWalletBtn();
+    };
+
+    // document.getElementById('connectOkxWalletBtn').onclick = function() {
+    //     console.log("1111111111111111111")
+    //     console.assert(1111111)
+    //     connectOkxWallet();
+    // };
 
   </script>
+
 </body>
 </html>

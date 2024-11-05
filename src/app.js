@@ -22,7 +22,7 @@ const infuraEthMainNetUrl = "https://mainnet.infura.io/v3/c7e8057fade44aaeb27574
 const web3 = new Web3(infuraEthMainNetUrl);
 
 // 查询余额函数
-async function checkBalance() {
+export async function checkBalance() {
   const address = document.getElementById("address").value;
   try {
     const balance = await web3.eth.getBalance(address);
@@ -33,8 +33,8 @@ async function checkBalance() {
   }
 }
 
-async function connectOkxWallet() {
-      const connectButton = document.getElementById('connectButton');
+export async function connectOkxWallet() {
+      const connectButton = document.getElementById('connectOkxWalletBtn');
       const statusText = document.getElementById('status');
 
       connectButton.onclick = async () => {
@@ -66,8 +66,8 @@ async function connectOkxWallet() {
 }
 
 
-async function disconnectOkxWallet() {
-  const connectButton = document.getElementById('disconnectButton');
+export async function disconnectOkxWallet() {
+  const connectButton = document.getElementById('disconnectOkxWalletBtn');
 
   connectButton.onclick = async () => {
     okxUniversalProvider.disconnect();
@@ -77,7 +77,7 @@ async function disconnectOkxWallet() {
 
 
 // 查询余额函数
-async function requestBalance() {
+export async function requestBalance() {
   const address = document.getElementById("address").value;
   try {
     data = {"method": "eth_getBalance", "params": ["0x8D97689C9818892B700e27F316cc3E41e17fBeb9", "latest"]}
@@ -119,3 +119,4 @@ async function sendTransaction() {
   }
 }
 
+module.exports = {requestBalance, connectOkxWallet, disconnectOkxWallet };
