@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Telegram DApp</title>
   <script src="https://cdn.jsdelivr.net/npm/web3@1.6.1/dist/web3.min.js"></script>
-  <script type="module" src="src/app.js"></script>
+  <!-- <script type="module" src="src/index.js"></script> -->
 
   <style>
     /* 设置页面背景为深色，以便白色字体更清晰 */
@@ -34,19 +34,27 @@
 <body>
   <h1>OkxWallet Telegram DApp Interface</h1>
 
-  <div>
+
+  <body>
+    <h1>OKX Wallet Connection Example</h1>
+    <button id="connectButton">Connect OKX Wallet</button>
+    <p id="status"></p>
+  </body>
+
+
+  <!-- <div>
     <h1>Connect to OkxWallet</h1>
     <button id="connectOkxWalletBtn">连接 Okx-Wallet</button>
     
-  </div>
+  </div> -->
 
-  <div>
+  <!-- <div>
     <p id="status"></p>
-  </div>
+  </div> -->
   
   <div>
     <h1>Disconnect to OkxWallet</h1>
-    <button onclick="disconnectOkxWallet()" id="disconnectOkxWalletBtn">断开链接 Okx-Wallet</button>
+    <button id="disconnectOkxWalletBtn">断开链接 Okx-Wallet</button>
   </div>
 
 
@@ -59,18 +67,51 @@
 
 
   <script type="module">
-    import { connectOkxWallet } from './src/app.js';
+    import { OKXUniversalProvider } from 'https://cdn.jsdelivr.net/npm/@walletconnect/universal-provider@2.17.1/dist/index.cjs.js';
+    // import { OKXUniversalProvider } from 'https://unpkg.com/@walletconnect/universal-provider@2.17.1/dist/esm/index.js';
+    // 创建 OKXUniversalProvider 实例
+    const provider = new OKXUniversalProvider();
 
-    document.getElementById('connectOkxWalletBtn').onclick = function() {
-        console.log("1111111111111111111")
-        console.assert(1111111)
-        connectOkxWallet();
+    document.getElementById('connectButton').onclick = async () => {
+        try {
+            // 请求连接钱包
+            await provider.connect();
+            // 获取钱包地址
+            const accounts = await provider.request({ method: 'eth_accounts' });
+            document.getElementById('status').innerText = `Connected: ${accounts[0]}`;
+        } catch (error) {
+            console.error(error);
+            document.getElementById('status').innerText = `Connection failed: ${error.message}`;
+        }
     };
 
-    document.getElementById('disconnectOkxWalletBtn').onclick = function() {
-        console.log("2222222222222")
-        disconnectOkxWalletBtn();
+    
+    document.getElementById('disconnectOkxWalletBtn').onclick = async () => {
+        try {
+          okxUniversalProvider.disconnect();
+          document.getElementById('status').innerText = `断开连接成功！`;
+        } catch (error) {
+            console.error(error);
+            document.getElementById('status').innerText = `disconnect failed: ${error.message}`;
+        }
     };
+
+
+    // import { connectOkxWallet } from './src/index.js';
+
+    // document.getElementById('connectOkxWalletBtn').onclick = function() {
+    //     console.log("1111111111111111111")
+    //     document.getElementById('status').innerText = "1111111111111111111";
+
+    //     connectOkxWallet();
+    // };
+
+    // document.getElementById('disconnectOkxWalletBtn').onclick = function() {
+    //     console.log("2222222222222")
+    //     document.getElementById('status').innerText = "222222";
+
+    //     disconnectOkxWalletBtn();
+    // };
 
     // document.getElementById('connectOkxWalletBtn').onclick = function() {
     //     console.log("1111111111111111111")

@@ -34,6 +34,8 @@ export async function checkBalance() {
 }
 
 export async function connectOkxWallet() {
+    alert("This is an alert connectOkxWallet!");
+
       const connectButton = document.getElementById('connectOkxWalletBtn');
       const statusText = document.getElementById('status');
 
