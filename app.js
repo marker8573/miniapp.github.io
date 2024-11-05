@@ -2,7 +2,7 @@
 
 // 初始化 Web3
 const web3 = new Web3("https://mainnet.infura.io/v3/c7e8057fade44aaeb27574f2f11170c0");
-
+c
 // 查询余额函数
 async function checkBalance() {
   const address = document.getElementById("address").value;
