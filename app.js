@@ -15,6 +15,29 @@ async function checkBalance() {
   }
 }
 
+async function connectMetamask() {
+      const connectButton = document.getElementById('connectButton');
+      const statusText = document.getElementById('status');
+
+      connectButton.onclick = async () => {
+          if (typeof window.ethereum !== 'undefined') {
+              try {
+                  // 请求用户连接到 MetaMask
+                  const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                  
+                  // 连接成功，显示用户地址
+                  statusText.innerText = `连接成功！您的地址是: ${accounts[0]}`;
+              } catch (error) {
+                  // 用户拒绝连接或发生错误
+                  console.error("用户拒绝连接:", error);
+                  statusText.innerText = "连接失败，请重试。";
+              }
+          } else {
+              statusText.innerText = "请安装 MetaMask 钱包！";
+          }
+      };
+}
+
 // 发送交易函数
 async function sendTransaction() {
   const from = document.getElementById("fromAddress").value;
